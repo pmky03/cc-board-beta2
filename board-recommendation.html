@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="robots" content="noindex,nofollow">
-<meta name="googlebot" content="noindex,nofollow">
 <title>Board Candidate Recommendation | The Colson Center</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -428,7 +426,7 @@ function getState(){return {v:1,savedAt:Date.now(),fields:serializeForm()};}
 function applyState(st){if(!st||!st.fields)return;const f=st.fields;form.querySelectorAll('input,select,textarea').forEach(el=>{if(!el.name||!(el.name in f))return;const v=f[el.name];if(el.type==='checkbox'||el.type==='radio')el.checked=Array.isArray(v)&&v.includes(el.value);else el.value=v;});syncChoiceStyles();}
 function loadState(){try{const s=localStorage.getItem(STORAGE_KEY);return s?JSON.parse(s):null;}catch(e){return null;}}
 function clearProgress(){try{localStorage.removeItem(STORAGE_KEY);}catch(e){}const el=document.getElementById('saveStatus');if(el)el.classList.remove('show');}
-function updateSaveStatus(kind){const el=document.getElementById('saveStatus'),t=document.getElementById('saveStatusTxt');if(!el)return;el.classList.add('show');if(kind==='warn'){el.classList.add('warn');t.textContent='Auto-save off in this view — use “Save a backup file”';}else{el.classList.remove('warn');t.textContent='Progress saved · '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});}}
+function updateSaveStatus(kind){const el=document.getElementById('saveStatus'),t=document.getElementById('saveStatusTxt');if(!el)return;el.classList.add('show');if(kind==='warn'){el.classList.add('warn');t.textContent='Auto-save off in this view — use "Save a backup file"';}else{el.classList.remove('warn');t.textContent='Progress saved · '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});}}
 function saveProgress(){if(!storageOK){updateSaveStatus('warn');return;}try{localStorage.setItem(STORAGE_KEY,JSON.stringify(getState()));updateSaveStatus('ok');}catch(e){updateSaveStatus('warn');}}
 let saveTimer=null;function debouncedSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveProgress,500);}
 
