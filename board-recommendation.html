@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex,nofollow">
+<meta name="googlebot" content="noindex,nofollow">
+<title>Board Candidate Recommendation | The Colson Center</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+  :root{
+    --navy:#102A43;--navy-700:#1B3A5B;--navy-900:#0B1E30;--ink:#16222E;
+    --teal:#1F7A72;--teal-600:#2A8C83;--teal-light:#E5F0EE;
+    --gold:#B5893C;--gold-soft:#D9BD7E;
+    --cream:#F4EFE5;--paper:#FFFFFF;--paper-warm:#FBF8F1;
+    --line:#E4DAC7;--line-strong:#D2C5AC;--muted:#697789;--danger:#B23A3A;
+    --shadow:0 18px 50px -28px rgba(16,42,67,.45);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--cream);
+    background-image:radial-gradient(circle at 12% -10%, rgba(31,122,114,.06), transparent 40%),radial-gradient(circle at 110% 0%, rgba(181,137,60,.07), transparent 38%);
+    color:var(--ink);font-family:'Hanken Grotesk',system-ui,sans-serif;font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:860px;margin:0 auto;padding:0 24px}
+
+  /* header */
+  header.site{background:var(--navy);background-image:linear-gradient(180deg,var(--navy-700),var(--navy) 60%,var(--navy-900));color:#EAF1F5;border-bottom:3px solid var(--gold)}
+  .head-inner{display:flex;align-items:center;gap:18px;padding:22px 24px;max-width:860px;margin:0 auto}
+  .mark{display:flex;align-items:center;gap:14px}
+  .cross{width:30px;height:38px;flex:none;position:relative}
+  .cross::before,.cross::after{content:"";position:absolute;background:var(--gold-soft);border-radius:1px}
+  .cross::before{width:6px;height:38px;left:12px;top:0}
+  .cross::after{width:24px;height:6px;left:3px;top:10px}
+  .wordmark{line-height:1.05}
+  .wordmark .org{font-family:'Fraunces',serif;font-weight:600;font-size:1.22rem;letter-spacing:.02em;color:#fff}
+  .wordmark .sub{font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-soft);font-weight:600}
+  .head-right{margin-left:auto;text-align:right;font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#9FB6C6}
+
+  main{padding:34px 0 140px}
+  .intro{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:34px 40px;margin-bottom:24px}
+  @media(max-width:560px){.intro{padding:26px 22px}}
+  .intro .eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:10px}
+  .intro h1{font-family:'Fraunces',serif;font-weight:600;font-size:2rem;line-height:1.12;color:var(--navy);margin:0 0 12px}
+  .intro p{color:var(--muted);max-width:64ch;margin:0;font-size:.96rem}
+
+  .block{background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:30px 40px;margin-bottom:22px}
+  @media(max-width:560px){.block{padding:24px 22px}}
+  .block .num{font-family:'Fraunces',serif;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:700;margin-bottom:6px}
+  .block h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.4rem;line-height:1.15;color:var(--navy);margin:0 0 4px}
+  .block .sublead{color:var(--muted);font-size:.92rem;margin:0 0 20px}
+  .block h2+.fields,.block h2+.field{margin-top:18px}
+
+  .grid{display:grid;gap:18px}
+  .g2{grid-template-columns:1fr 1fr}
+  @media(max-width:600px){.g2{grid-template-columns:1fr}}
+  .field{display:flex;flex-direction:column;gap:6px;margin-bottom:18px}
+  .field:last-child{margin-bottom:0}
+  label.q,.q{font-weight:600;font-size:.92rem;color:var(--ink);line-height:1.4}
+  .q .req{color:var(--danger);margin-left:3px}
+  .help{font-size:.82rem;color:var(--muted);margin:-2px 0 2px;font-weight:400;line-height:1.45}
+  input[type=text],input[type=email],input[type=tel],input[type=date],input[type=number],select,textarea{
+    font-family:inherit;font-size:.95rem;color:var(--ink);background:var(--paper-warm);border:1px solid var(--line-strong);border-radius:9px;padding:11px 13px;width:100%;transition:border .15s,box-shadow .15s,background .15s}
+  textarea{resize:vertical;min-height:96px;line-height:1.5}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--teal);background:#fff;box-shadow:0 0 0 3px rgba(31,122,114,.14)}
+  input.invalid,select.invalid,textarea.invalid{border-color:var(--danger);box-shadow:0 0 0 3px rgba(178,58,58,.12)}
+  select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23697789' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+
+  .choices{display:flex;flex-direction:column;gap:9px}
+  .choice{display:flex;align-items:flex-start;gap:11px;padding:11px 14px;border:1px solid var(--line-strong);border-radius:10px;cursor:pointer;background:var(--paper-warm);transition:.15s;font-size:.92rem;line-height:1.4}
+  .choice:hover{border-color:var(--teal);background:#fff}
+  .choice input{margin-top:2px;accent-color:var(--teal);width:16px;height:16px;flex:none}
+  .choice.checked{border-color:var(--teal);background:var(--teal-light)}
+  .grid-choices{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  @media(max-width:560px){.grid-choices{grid-template-columns:1fr}}
+
+  .callout{background:var(--teal-light);border:1px solid #BFDCD7;border-radius:12px;padding:14px 18px;font-size:.88rem;color:#1d4a46;margin-top:18px}
+
+  /* sticky action bar */
+  .actionbar{position:sticky;bottom:0;z-index:30;background:rgba(251,248,241,.95);backdrop-filter:blur(6px);border:1px solid var(--line);border-radius:14px;box-shadow:0 -10px 40px -26px rgba(16,42,67,.5);padding:14px 22px;display:flex;align-items:center;gap:16px;margin-top:6px}
+  .save-status{display:flex;align-items:center;gap:7px;font-size:.78rem;color:var(--muted);font-weight:600;opacity:0;transition:opacity .3s}
+  .save-status.show{opacity:1}
+  .save-status .dot{width:7px;height:7px;border-radius:50%;background:var(--teal)}
+  .save-status.warn{color:var(--gold)}.save-status.warn .dot{background:var(--gold)}
+  .actionbar .spacer{margin-left:auto}
+  @media(max-width:560px){.actionbar{flex-wrap:wrap}.save-status{order:2;width:100%}}
+
+  .btn{font-family:inherit;font-weight:600;font-size:.92rem;border-radius:10px;padding:12px 26px;cursor:pointer;border:1px solid transparent;transition:.16s}
+  .btn-primary{background:var(--teal);color:#fff;box-shadow:0 8px 22px -10px rgba(31,122,114,.7)}
+  .btn-primary:hover{background:var(--teal-600);transform:translateY(-1px)}
+  .btn-ghost{background:transparent;color:var(--navy);border-color:var(--line-strong)}
+  .btn-ghost:hover{background:#fff;border-color:var(--navy)}
+  .btn-gold{background:var(--navy);color:#fff}.btn-gold:hover{background:var(--navy-900)}
+
+  .err-banner{display:none;background:#FBEAEA;border:1px solid #E6C2C2;color:var(--danger);border-radius:9px;padding:10px 14px;font-size:.86rem;font-weight:500;margin-bottom:22px}
+  .err-banner.show{display:block}
+
+  .resume{display:flex;flex-wrap:wrap;align-items:center;gap:12px;background:var(--teal-light);border:1px solid #BFDCD7;border-radius:12px;padding:14px 18px;margin-bottom:22px}
+  .resume p{margin:0;font-size:.9rem;color:#1d4a46;flex:1;min-width:220px}
+  .resume p strong{color:var(--teal)}
+  .resume .btn{padding:9px 16px;font-size:.84rem}
+  .backup-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px;padding-top:16px;border-top:1px dashed var(--line-strong)}
+  .backup-row .lbl{font-size:.84rem;color:var(--muted);font-weight:600}
+  .backup-row .btn{padding:8px 15px;font-size:.83rem}
+
+  .success{display:none;background:var(--paper);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:42px 40px;text-align:center}
+  .success.show{display:block}
+  .success .seal{width:74px;height:74px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-size:2rem;margin:0 auto 16px;box-shadow:0 12px 30px -12px rgba(31,122,114,.7)}
+  .success h2{font-family:'Fraunces',serif;font-weight:600;font-size:1.7rem;color:var(--navy);margin:0 0 8px}
+  .success p{color:var(--muted);max-width:60ch;margin:0 auto}
+  .dl-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:24px}
+  .footnote{text-align:center;color:var(--muted);font-size:.78rem;margin-top:20px;line-height:1.6}
+  .footnote a{color:var(--teal)}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="head-inner">
+    <div class="mark">
+      <div class="cross" aria-hidden="true"></div>
+      <div class="wordmark"><div class="org">The Colson Center</div><div class="sub">for Christian Worldview</div></div>
+    </div>
+    <div class="head-right">Board Candidate<br>Recommendation</div>
+  </div>
+</header>
+
+<div class="wrap">
+  <main>
+    <div class="intro">
+      <div class="eyebrow">Confidential Nomination</div>
+      <h1>Board Candidate Recommendation</h1>
+      <p>Thank you for helping identify future leaders for the Colson Center Board of Directors. Use this form to recommend an individual for consideration. Your candid assessment is reviewed in confidence by the Board Development Committee and informs whom we invite into the screening and interview process.</p>
+    </div>
+
+    <div class="resume" id="resumeBanner" style="display:none"></div>
+    <div class="err-banner" id="errBanner"></div>
+
+    <form id="reco" novalidate>
+
+      <!-- NOMINEE -->
+      <section class="block" data-sec="Nominee">
+        <div class="num">The Nominee</div>
+        <h2>Who are you recommending?</h2>
+        <div class="grid g2" style="margin-top:18px">
+          <div class="field" data-label="Name"><label class="q" for="nName">Name<span class="req">*</span></label><input type="text" id="nName" name="Nominee — name" required></div>
+          <div class="field" data-label="Current role / organization"><label class="q" for="nRole">Current role / organization<span class="req">*</span></label><input type="text" id="nRole" name="Nominee — role/org" required></div>
+        </div>
+        <div class="field" data-label="Location"><label class="q" for="nLoc">Location<span class="req">*</span></label><input type="text" id="nLoc" name="Nominee — location" placeholder="City, State" required></div>
+        <div class="grid g2">
+          <div class="field" data-label="Email (if known)"><label class="q" for="nEmail">Email <span style="font-weight:400;color:var(--muted)">(if known)</span></label><input type="email" id="nEmail" name="Nominee — email"></div>
+          <div class="field" data-label="Phone (if known)"><label class="q" for="nPhone">Phone <span style="font-weight:400;color:var(--muted)">(if known)</span></label><input type="tel" id="nPhone" name="Nominee — phone"></div>
+        </div>
+      </section>
+
+      <!-- NOMINATOR -->
+      <section class="block" data-sec="Nominator">
+        <div class="num">The Nominator</div>
+        <h2>About you</h2>
+        <div class="grid g2" style="margin-top:18px">
+          <div class="field" data-label="Name"><label class="q" for="rName">Name<span class="req">*</span></label><input type="text" id="rName" name="Nominator — name" required></div>
+          <div class="field" data-label="Role"><label class="q" for="rRole">Role<span class="req">*</span></label>
+            <select id="rRole" name="Nominator — role" required><option value=""></option><option>Board Member</option><option>Former Board Member</option><option>Senior Leadership Team (SLT)</option><option>Staff</option><option>Other</option></select></div>
+        </div>
+        <div class="grid g2">
+          <div class="field" data-label="Relationship to nominee"><label class="q" for="rRel">Relationship to nominee<span class="req">*</span></label><input type="text" id="rRel" name="Nominator — relationship" required></div>
+          <div class="field" data-label="Years known"><label class="q" for="rYears">Years known<span class="req">*</span></label><input type="text" id="rYears" name="Nominator — years known" required></div>
+        </div>
+      </section>
+
+      <!-- 1 WHY -->
+      <section class="block" data-sec="Why This Person">
+        <div class="num">Section 1</div>
+        <h2>Why this person?</h2>
+        <p class="sublead">Why do you believe this individual should be considered for the Colson Center Board? (3–5 sentences)</p>
+        <div class="field" data-label="Why this person">
+          <textarea id="why" name="Why this person" style="min-height:130px" required></textarea></div>
+      </section>
+
+      <!-- 2 ALIGNMENT / CHARACTER / FIT -->
+      <section class="block" data-sec="Mission Alignment, Character & Board Fit">
+        <div class="num">Section 2</div>
+        <h2>Mission alignment, character &amp; board fit</h2>
+        <p class="sublead">How does this individual demonstrate each of the following?</p>
+        <div class="field" data-label="Alignment with TCC mission & Christian worldview"><label class="q" for="a1">Alignment with the Colson Center mission and a Christian worldview<span class="req">*</span></label>
+          <textarea id="a1" name="Alignment with mission & worldview" required></textarea></div>
+        <div class="field" data-label="Spiritual maturity & integrity"><label class="q" for="a2">Spiritual maturity and integrity<span class="req">*</span></label>
+          <textarea id="a2" name="Spiritual maturity & integrity" required></textarea></div>
+        <div class="field" data-label="Humility, collaboration & peer-board fit"><label class="q" for="a3">Humility, collaboration, and the ability to function well in a peer board environment<span class="req">*</span></label>
+          <textarea id="a3" name="Humility, collaboration & board fit" required></textarea></div>
+      </section>
+
+      <!-- 3 EXPERIENCE / STRENGTHS -->
+      <section class="block" data-sec="Experience & Contribution to the Board">
+        <div class="num">Section 3</div>
+        <h2>Experience &amp; contribution to the board</h2>
+        <p class="sublead">What are this person's most relevant strengths for board service? Check all that apply.</p>
+        <div class="field" data-label="Strengths">
+          <div class="grid-choices" id="strengthGrid" data-min="1"></div>
+        </div>
+        <div class="field" data-label="Other strength (specify)"><label class="q" for="otherStrength">If "Other," please specify</label><input type="text" id="otherStrength" name="Strengths — other" data-other></div>
+        <div class="field" data-label="Comments on strengths"><label class="q" for="comments">Brief comments — depth, level, and examples<span class="req">*</span></label>
+          <textarea id="comments" name="Comments on strengths" required></textarea></div>
+      </section>
+
+      <!-- 4 READINESS -->
+      <section class="block" data-sec="Readiness & Capacity">
+        <div class="num">Section 4</div>
+        <h2>Readiness &amp; capacity</h2>
+        <p class="sublead">Based on your knowledge, please comment on the candidate's readiness across the following.</p>
+        <div class="field" data-label="National board engagement (travel; 3 meetings/year)"><label class="q" for="r1">Ability to engage in a national board requiring travel (approximately 3 meetings per year)<span class="req">*</span></label>
+          <textarea id="r1" name="National board engagement & travel" required></textarea></div>
+        <div class="field" data-label="Willingness to contribute time, prep & committee work"><label class="q" for="r2">Willingness to contribute time, preparation, and committee participation<span class="req">*</span></label>
+          <textarea id="r2" name="Willingness to contribute time & committee work" required></textarea></div>
+        <div class="field" data-label="Overall readiness for this stage of service"><label class="q" for="r3">Overall readiness for this stage of service<span class="req">*</span></label>
+          <textarea id="r3" name="Overall readiness" required></textarea></div>
+      </section>
+
+      <!-- 5 CONNECTION -->
+      <section class="block" data-sec="Connection to The Colson Center">
+        <div class="num">Section 5 · Optional</div>
+        <h2>Connection to the Colson Center</h2>
+        <p class="sublead">Keep this brief — optional.</p>
+        <div class="field" data-label="Prior engagement with TCC or similar ministry"><label class="q" for="c1">Prior engagement with the Colson Center or a similar ministry?</label>
+          <input type="text" id="c1" name="Prior engagement with TCC"></div>
+        <div class="field" data-label="Colson Fellow (Centurion)?"><label class="q" for="c2">Colson Fellow (Centurion), if applicable?</label>
+          <select id="c2" name="Colson Fellow (Centurion)"><option value=""></option><option>Yes — Colson Fellow</option><option>Yes — Centurion</option><option>No</option><option>Unsure</option></select></div>
+      </section>
+
+      <!-- 6 CONCERNS -->
+      <section class="block" data-sec="Concerns or Watchouts">
+        <div class="num">Section 6</div>
+        <h2>Any concerns or watchouts</h2>
+        <p class="sublead">Please note anything the Board should be aware of — capacity, fit, risks, etc.</p>
+        <div class="field" data-label="Concerns or watchouts"><label class="q" for="concerns">Concerns or watchouts<span class="req">*</span></label>
+          <p class="help">Candor here protects both the nominee and the Board. If you have none, simply write "None."</p>
+          <textarea id="concerns" name="Concerns or watchouts" required></textarea></div>
+      </section>
+
+      <!-- 7 RECOMMENDATION -->
+      <section class="block" data-sec="Overall Recommendation">
+        <div class="num">Section 7</div>
+        <h2>Overall recommendation</h2>
+        <div class="field" data-label="Overall recommendation" style="margin-top:18px">
+          <div class="choices" id="recGroup">
+            <label class="choice"><input type="radio" name="Overall recommendation" value="Strongly Recommend" required><span>Strongly Recommend</span></label>
+            <label class="choice"><input type="radio" name="Overall recommendation" value="Recommend"><span>Recommend</span></label>
+            <label class="choice"><input type="radio" name="Overall recommendation" value="Recommend with reservations"><span>Recommend with the following reservations</span></label>
+          </div>
+        </div>
+        <div class="field" data-label="Reservations"><label class="q" for="reservations">If recommending with reservations, please explain</label>
+          <textarea id="reservations" name="Reservations" data-reservation style="min-height:80px"></textarea></div>
+
+        <div class="callout">
+          <label class="choice" style="background:transparent;border:none;padding:0;gap:9px">
+            <input type="checkbox" id="attest" name="Attestation" value="Confirmed" required>
+            <span>This recommendation reflects my honest assessment, offered in confidence to support the Board Development Committee.</span>
+          </label>
+        </div>
+        <div class="grid g2" style="margin-top:18px">
+          <div class="field" data-label="Submitted by"><label class="q" for="sig">Your name (confirmation)<span class="req">*</span></label><input type="text" id="sig" name="Submitted by" required></div>
+          <div class="field" data-label="Date"><label class="q" for="sdate">Date<span class="req">*</span></label><input type="date" id="sdate" name="Date" required></div>
+        </div>
+
+        <div class="backup-row">
+          <span class="lbl">Need to pause, or switch devices?</span>
+          <button type="button" class="btn btn-ghost" id="saveFileBtn">Save a backup file</button>
+          <button type="button" class="btn btn-ghost" id="loadFileBtn">Restore from file</button>
+          <input type="file" id="loadFileInput" accept="application/json,.json" hidden>
+        </div>
+      </section>
+
+      <!-- ACTION BAR -->
+      <div class="actionbar">
+        <span class="save-status" id="saveStatus"><span class="dot"></span><span id="saveStatusTxt">Saved</span></span>
+        <span class="spacer"></span>
+        <button type="button" class="btn btn-primary" id="submitBtn">Submit recommendation</button>
+      </div>
+    </form>
+
+    <!-- SUCCESS -->
+    <div class="success" id="success">
+      <div class="seal">✓</div>
+      <h2>Recommendation Complete</h2>
+      <p>Thank you for investing in the future of the Colson Center Board. Download a PDF for your records and send your recommendation to the Board Development Committee using the button below.</p>
+      <div class="dl-row">
+        <button type="button" class="btn btn-primary" id="dlBtn">Download PDF</button>
+        <button type="button" class="btn btn-gold" id="emailBtn">Email recommendation</button>
+        <button type="button" class="btn btn-ghost" id="printBtn">Print</button>
+      </div>
+      <p class="footnote">Questions? Contact the Board Development Committee at <a href="mailto:pmarra@colsoncenter.org">pmarra@colsoncenter.org</a>.<br>This recommendation is held in strict confidence.</p>
+    </div>
+  </main>
+</div>
+
+<script>
+const form=document.getElementById('reco');
+const errBanner=document.getElementById('errBanner');
+const RECIPIENT='pmarra@colsoncenter.org';
+
+/* strengths checkboxes */
+const STRENGTHS=["Theology / Worldview","Finance / Audit","Governance / Board Experience","Development / Fundraising","Organizational Leadership","Legal / HR","Communications / Digital","Church Leadership","Investment / Financial Markets","Public / Cultural Engagement","Other"];
+const sg=document.getElementById('strengthGrid');
+STRENGTHS.forEach(s=>{
+  const l=document.createElement('label');l.className='choice';
+  l.innerHTML=`<input type="checkbox" name="Strengths" value="${s}"><span>${s}</span>`;
+  sg.appendChild(l);
+});
+
+function syncChoiceStyles(){ form.querySelectorAll('.choice').forEach(c=>{const i=c.querySelector('input');if(i)c.classList.toggle('checked',i.checked);}); }
+form.addEventListener('change',e=>{ syncChoiceStyles(); if(e.target.classList.contains('invalid'))e.target.classList.remove('invalid'); debouncedSave(); });
+form.addEventListener('input',debouncedSave);
+
+/* ---------- collect for output ---------- */
+function collect(){
+  const out=[];
+  document.querySelectorAll('.block[data-sec]').forEach(sec=>{
+    const rows=[];
+    sec.querySelectorAll('.field[data-label]').forEach(f=>{
+      const label=f.dataset.label;
+      const checks=[...f.querySelectorAll('input[type=checkbox]')];
+      const radios=[...f.querySelectorAll('input[type=radio]')];
+      let val='';
+      if(checks.length && f.querySelector('input[name="Strengths"]')){
+        val=checks.filter(c=>c.checked).map(c=>c.value).join(', ');
+      } else if(checks.length){ // attestation single checkbox
+        const c=checks[0]; val=c.checked?(c.value||'Confirmed'):'';
+      } else if(radios.length){
+        const r=radios.find(x=>x.checked); val=r?r.value:'';
+      } else {
+        const el=f.querySelector('input,select,textarea'); val=el?el.value.trim():'';
+      }
+      rows.push([label,val]);
+    });
+    if(rows.length) out.push({title:sec.dataset.sec,rows});
+  });
+  return out;
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));}
+function nomineeName(){ return document.getElementById('nName').value.trim()||'Nominee'; }
+function fileSlug(){ return (document.getElementById('nName').value.trim()||'nominee').replace(/\s+/g,'-').toLowerCase(); }
+
+/* ---------- validation ---------- */
+function validate(){
+  errBanner.classList.remove('show');
+  let firstBad=null;
+  form.querySelectorAll('.invalid').forEach(el=>el.classList.remove('invalid'));
+  form.querySelectorAll('[required]').forEach(inp=>{
+    if(inp.type==='checkbox'||inp.type==='radio'){
+      const group=[...form.querySelectorAll(`[name="${CSS.escape(inp.name)}"]`)];
+      if(!group.some(g=>g.checked)){ if(!firstBad)firstBad=inp; }
+    } else if(!inp.value.trim()){ inp.classList.add('invalid'); if(!firstBad)firstBad=inp; }
+    if(inp.type==='email'&&inp.value.trim()&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(inp.value)){ inp.classList.add('invalid'); if(!firstBad)firstBad=inp; }
+  });
+  // at least one strength
+  const anyStrength=[...form.querySelectorAll('input[name="Strengths"]')].some(c=>c.checked);
+  if(!anyStrength && !document.getElementById('otherStrength').value.trim()){ if(!firstBad)firstBad=document.getElementById('strengthGrid'); }
+  if(firstBad){
+    errBanner.textContent='Please complete the highlighted required fields before submitting.';
+    errBanner.classList.add('show');
+    (firstBad.closest('.block')||firstBad).scrollIntoView({behavior:'smooth',block:'center'});
+    if(firstBad.focus) try{firstBad.focus({preventScroll:true});}catch(e){}
+    return false;
+  }
+  return true;
+}
+
+document.getElementById('submitBtn').addEventListener('click',()=>{
+  if(!validate()) return;
+  clearProgress();
+  form.style.display='none';
+  document.querySelector('.actionbar').style.display='none';
+  const s=document.getElementById('success'); s.classList.add('show');
+  window.scrollTo({top:0,behavior:'smooth'});
+});
+
+/* ---------- output builders ---------- */
+function buildDocElement(){
+  const data=collect();
+  const el=document.createElement('div');
+  el.style.cssText='width:760px;padding:40px;background:#fff;font-family:Georgia,serif;color:#16222E;line-height:1.5';
+  let html=`<h1 style="font-size:22px;color:#102A43;border-bottom:3px solid #B5893C;padding-bottom:8px;margin:0 0 4px">The Colson Center — Board Candidate Recommendation</h1>
+    <div style="color:#697789;font-size:13px;margin-bottom:22px;font-family:Arial,sans-serif">Confidential &middot; Nominee: <strong>${escapeHtml(nomineeName())}</strong> &middot; Generated ${new Date().toLocaleString()}</div>`;
+  data.forEach(sec=>{
+    html+=`<h2 style="font-size:15px;color:#1F7A72;margin:24px 0 4px;border-bottom:1px solid #ddd;padding-bottom:4px;page-break-after:avoid">${sec.title}</h2><table style="width:100%;border-collapse:collapse">`;
+    sec.rows.forEach(([q,a])=>{ html+=`<tr><td style="width:36%;padding:7px 8px;vertical-align:top;font-size:12.5px;color:#697789;font-family:Arial,sans-serif;border-bottom:1px solid #eee">${escapeHtml(q)}</td><td style="padding:7px 8px;vertical-align:top;font-size:12.5px;border-bottom:1px solid #eee;white-space:pre-wrap">${a?escapeHtml(a):'—'}</td></tr>`; });
+    html+='</table>';
+  });
+  el.innerHTML=html; return el;
+}
+function buildDocHtml(){
+  const tmp=buildDocElement();
+  return `<!DOCTYPE html><html><head><meta charset="utf-8"><title>Board Recommendation — ${escapeHtml(nomineeName())}</title></head><body style="max-width:800px;margin:30px auto">${tmp.innerHTML}</body></html>`;
+}
+document.getElementById('dlBtn').addEventListener('click',function(){
+  const btn=this,orig=btn.textContent;
+  if(typeof html2pdf==='undefined'){
+    const blob=new Blob([buildDocHtml()],{type:'text/html'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`colson-board-recommendation-${fileSlug()}.html`;a.click();URL.revokeObjectURL(a.href);return;
+  }
+  btn.textContent='Preparing PDF…';btn.disabled=true;
+  const el=buildDocElement();el.style.position='fixed';el.style.left='-10000px';el.style.top='0';document.body.appendChild(el);
+  html2pdf().set({margin:[12,10,14,10],filename:`colson-board-recommendation-${fileSlug()}.pdf`,image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff'},jsPDF:{unit:'mm',format:'letter',orientation:'portrait'},pagebreak:{mode:['css','legacy']}}).from(el).save().then(()=>{el.remove();btn.textContent=orig;btn.disabled=false;}).catch(()=>{el.remove();btn.textContent=orig;btn.disabled=false;alert('PDF generation failed. Use Print to save as PDF instead.');});
+});
+document.getElementById('printBtn').addEventListener('click',()=>{
+  const w=window.open('','_blank');if(!w){alert('Please allow pop-ups to print, or use Download PDF.');return;}
+  w.document.write(buildDocHtml());w.document.close();w.focus();setTimeout(()=>w.print(),350);
+});
+function buildEmailBody(){
+  const data=collect();
+  let lines=['THE COLSON CENTER — BOARD CANDIDATE RECOMMENDATION','Confidential nomination','Nominee: '+nomineeName(),'Submitted: '+new Date().toLocaleString(),'======================================================',''];
+  data.forEach(sec=>{ lines.push('— '+sec.title.toUpperCase()+' —'); sec.rows.forEach(([q,a])=>{lines.push(q+':');lines.push('  '+(a||'—'));lines.push('');}); lines.push(''); });
+  return lines.join('\n');
+}
+document.getElementById('emailBtn').addEventListener('click',()=>{
+  const subj=encodeURIComponent('Board Candidate Recommendation — '+nomineeName());
+  const body=encodeURIComponent(buildEmailBody());
+  window.location.href=`mailto:${RECIPIENT}?subject=${subj}&body=${body}`;
+});
+
+/* ---------- autosave / restore ---------- */
+const STORAGE_KEY='cc_board_reco_v1';
+let storageOK=true;
+try{const t='__t__';localStorage.setItem(t,'1');localStorage.removeItem(t);}catch(e){storageOK=false;}
+function serializeForm(){const o={};form.querySelectorAll('input,select,textarea').forEach(el=>{if(!el.name)return;if(el.type==='checkbox'||el.type==='radio'){if(!Array.isArray(o[el.name]))o[el.name]=[];if(el.checked)o[el.name].push(el.value);}else o[el.name]=el.value;});return o;}
+function getState(){return {v:1,savedAt:Date.now(),fields:serializeForm()};}
+function applyState(st){if(!st||!st.fields)return;const f=st.fields;form.querySelectorAll('input,select,textarea').forEach(el=>{if(!el.name||!(el.name in f))return;const v=f[el.name];if(el.type==='checkbox'||el.type==='radio')el.checked=Array.isArray(v)&&v.includes(el.value);else el.value=v;});syncChoiceStyles();}
+function loadState(){try{const s=localStorage.getItem(STORAGE_KEY);return s?JSON.parse(s):null;}catch(e){return null;}}
+function clearProgress(){try{localStorage.removeItem(STORAGE_KEY);}catch(e){}const el=document.getElementById('saveStatus');if(el)el.classList.remove('show');}
+function updateSaveStatus(kind){const el=document.getElementById('saveStatus'),t=document.getElementById('saveStatusTxt');if(!el)return;el.classList.add('show');if(kind==='warn'){el.classList.add('warn');t.textContent='Auto-save off in this view — use “Save a backup file”';}else{el.classList.remove('warn');t.textContent='Progress saved · '+new Date().toLocaleTimeString([],{hour:'numeric',minute:'2-digit'});}}
+function saveProgress(){if(!storageOK){updateSaveStatus('warn');return;}try{localStorage.setItem(STORAGE_KEY,JSON.stringify(getState()));updateSaveStatus('ok');}catch(e){updateSaveStatus('warn');}}
+let saveTimer=null;function debouncedSave(){clearTimeout(saveTimer);saveTimer=setTimeout(saveProgress,500);}
+
+function showResumeBanner(saved){
+  const b=document.getElementById('resumeBanner');
+  const when=saved.savedAt?new Date(saved.savedAt).toLocaleString():'earlier';
+  b.innerHTML=`<p><strong>Welcome back.</strong> We restored a draft you saved ${when}.</p><button type="button" class="btn btn-ghost" id="startOverBtn">Start over</button>`;
+  b.style.display='flex';
+  document.getElementById('startOverBtn').onclick=()=>{clearProgress();form.reset();syncChoiceStyles();b.style.display='none';};
+}
+
+document.getElementById('saveFileBtn').addEventListener('click',()=>{
+  const blob=new Blob([JSON.stringify(getState(),null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='colson-recommendation-draft.json';a.click();URL.revokeObjectURL(a.href);
+});
+document.getElementById('loadFileBtn').addEventListener('click',()=>document.getElementById('loadFileInput').click());
+document.getElementById('loadFileInput').addEventListener('change',ev=>{
+  const file=ev.target.files[0];if(!file)return;const r=new FileReader();
+  r.onload=()=>{try{applyState(JSON.parse(r.result));saveProgress();window.scrollTo({top:0,behavior:'smooth'});}catch(e){alert('Sorry — that file could not be read as a saved draft.');}ev.target.value='';};
+  r.readAsText(file);
+});
+
+/* init */
+const saved=storageOK?loadState():null;
+if(saved&&saved.fields&&Object.keys(saved.fields).length){applyState(saved);showResumeBanner(saved);}
+syncChoiceStyles();
+if(!storageOK)updateSaveStatus('warn');
+</script>
+</body>
+</html>
